@@ -7,7 +7,7 @@ from sklearn.preprocessing import normalize
 import faiss
 import streamlit as st 
 import datetime
-import psycopg2
+embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 # --- API Keys ---
 openai.api_key = "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"
