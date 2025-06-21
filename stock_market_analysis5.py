@@ -17,42 +17,40 @@ news_api_key = "0d1e0cc62cad47b4aa7623adfb2d4684"
 alpha_vantage_api_key="UTRNX3Y6VG4ZXL24"
 
 # --- Load Embedding Model ---
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2") 
+import requests
+# --- PostgreSQL Config ----
 
-# --- PostgreSQL Config ---
-DB_CONFIG = {
-    "dbname": "postgres",
-    "user": "postgres",
-    "password": "123456", 
-    "host": "localhost",
-    "port": "5432"
+SUPABASE_URL = "https://rtxwmpbwggrlxqeajgvm.supabase.co"
+SUPABASE_API_KEY = "your-anon-api-key"  # 🔐 Replace with your actual key
+
+headers = {
+    "apikey": SUPABASE_API_KEY,
+    "Authorization": f"Bearer {SUPABASE_API_KEY}"
 }
 
 # --- Fetch Company Symbol & Exchange from PostgreSQL ---
 def fetch_ticker_from_db(company_name):
-    conn = psycopg2.connect(**DB_CONFIG)
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT symbol, exchange FROM stock_symbols
-        WHERE LOWER(company_name) = %s
-        LIMIT 1
-    """, (company_name.lower(),))
-    result = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    return result
+    url = f"{SUPABASE_URL}/rest/v1/stock_symbol"
+    params = {
+        "company_name": f"eq.{company_name}",
+        "select": "symbol,exchange"
+    }
+    response = requests.get(url, headers=headers, params=params)
+    data = response.json()
+    
+    if data:
+        return data[0]["symbol"], data[0]["exchange"]
+    return None
 
 # --- Match Query with Company in DB ---
 def match_company_in_db(user_query):
-    conn = psycopg2.connect(**DB_CONFIG)
-    cursor = conn.cursor()
-    cursor.execute("SELECT company_name FROM stock_symbols")
-    all_companies = [row[0] for row in cursor.fetchall()]
-    cursor.close()
-    conn.close()
-
-    for name in all_companies:
-        if name.lower() in user_query.lower(): 
+    url = f"{SUPABASE_URL}/rest/v1/stock_symbol"
+    params = {"select": "company_name"}
+    response = requests.get(url, headers=headers, params=params)
+    companies = [row["company_name"] for row in response.json()]
+    
+    for name in companies:
+        if name.lower() in user_query.lower():
             return name
     return None
 
