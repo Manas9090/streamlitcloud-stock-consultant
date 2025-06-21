@@ -10,12 +10,19 @@ import datetime
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 # --- API Keys ---
-openai.api_key = "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"
-twelvedata_api_key = "8b12c89c35be4fd0b13bcacbfba4700a" 
-news_api_key = "0d1e0cc62cad47b4aa7623adfb2d4684" 
-#alpha_vantage_api_key = "KXOVYT1RRA7HT88W" 
-alpha_vantage_api_key="UTRNX3Y6VG4ZXL24"
+# openai.api_key = "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"
+# twelvedata_api_key = "8b12c89c35be4fd0b13bcacbfba4700a" 
+# news_api_key = "0d1e0cc62cad47b4aa7623adfb2d4684" 
+# #alpha_vantage_api_key = "KXOVYT1RRA7HT88W" 
+# alpha_vantage_api_key="UTRNX3Y6VG4ZXL24"
 
+import streamlit as st
+import openai
+
+openai.api_key = st.secrets["api_keys"]["openai"]
+alpha_vantage_api_key = st.secrets["api_keys"]["alpha_vantage_api_key"]
+twelvedata_api_key = st.secrets["api_keys"]["twelvedata_api_key"]
+news_api_key =  st.secrets["api_keys"]["news_api_key"]
 # --- Load Embedding Model ---
 import requests
 # --- PostgreSQL Config ----
