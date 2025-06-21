@@ -21,7 +21,7 @@ import requests
 # --- PostgreSQL Config ----
 
 SUPABASE_URL = "https://rtxwmpbwggrlxqeajgvm.supabase.co"
-SUPABASE_API_KEY = "your-anon-api-key"  # 🔐 Replace with your actual key
+SUPABASE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ0eHdtcGJ3Z2dybHhxZWFqZ3ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0Nzk1ODcsImV4cCI6MjA2NjA1NTU4N30.k1hRAnUdodcsnnc1x2SI9mIP3Y6WRW6nDMJpPffNnY8"  # 🔐 Replace with your actual key
 
 headers = {
     "apikey": SUPABASE_API_KEY,
