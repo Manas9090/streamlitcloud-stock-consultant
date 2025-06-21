@@ -1,9 +1,1 @@
-openai
-requests
-pandas
-numpy
-sentence-transformers
-scikit-learn
-faiss-cpu
-psycopg2-binary
-streamlit
+python-3.10
