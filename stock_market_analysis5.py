@@ -19,10 +19,11 @@ embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 import streamlit as st
 import openai
 
-openai.api_key = st.secrets["api_keys"]["openai_key"]
-alpha_vantage_api_key = st.secrets["api_keys"]["alpha_vantage_api_key"]
-twelvedata_api_key = st.secrets["api_keys"]["twelvedata_api_key"]
-news_api_key =  st.secrets["api_keys"]["news_api_key"]
+openai.api_key = st.secrets["api_keys"]["openai"]
+alpha_vantage_api_key = st.secrets["api_keys"]["alpha_vantage"]
+twelvedata_api_key = st.secrets["api_keys"]["twelvedata"]
+news_api_key = st.secrets["api_keys"]["newsapi"]
+
 # --- Load Embedding Model ---
 import requests
 # --- PostgreSQL Config ----
